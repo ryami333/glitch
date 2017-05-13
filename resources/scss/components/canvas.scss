@@ -1,0 +1,12 @@
+.canvas {
+    //
+
+    &__image {
+        display: none;
+    }
+
+    &__canvas {
+        width: 100vw;
+        height: 100vh;
+    }
+}
