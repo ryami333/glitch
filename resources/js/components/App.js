@@ -18,7 +18,25 @@ class App extends Component {
         this.ctx = this.canvas.getContext('2d', { alpha: false });
 
         this.img.addEventListener('load', () => {
-            this.ctx.drawImage(this.img, 0, 0, window.innerWidth, window.innerHeight);
+            let canvasRatio = window.innerWidth / window.innerHeight;
+            let imageRatio = this.img.naturalWidth / this.img.naturalHeight;
+
+            // Stretch to fit width-wise
+
+            let drawWidth, drawHeight;
+
+            if (canvasRatio < imageRatio) {
+                drawHeight = window.innerHeight;
+                drawWidth = (window.innerHeight / this.img.naturalHeight) * this.img.naturalWidth;
+            } else {
+                drawWidth = window.innerWidth;
+                drawHeight = (window.innerWidth / this.img.naturalWidth) * this.img.naturalHeight;
+            }
+
+            let offsetWidth = 0.5 * (window.innerWidth - drawWidth);
+            let offsetHeight = 0.5 * (window.innerHeight - drawHeight);
+
+            this.ctx.drawImage(this.img, offsetWidth, offsetHeight, drawWidth, drawHeight);
         });
     }
 
