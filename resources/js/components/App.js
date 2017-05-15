@@ -12,6 +12,7 @@ class App extends Component {
     ctx;
     img;
     pixels;
+    len;
 
     componentDidMount() {
         this.canvas.width = window.innerWidth;
@@ -42,6 +43,8 @@ class App extends Component {
 
             this.imageData = this.ctx.getImageData(0,0,window.innerWidth, window.innerHeight);
 
+            this.len = this.len = this.imageData.data.length;
+
             this._loop();
         });
     }
@@ -49,12 +52,17 @@ class App extends Component {
     _loop() {
         window.requestAnimationFrame(function() {
             let newData = this.imageData.data;
-            let captureStart = ~~(Math.random() * this.pixels);
-            let captureLength = ~~(Math.random() * this.pixels * 0.1);
-            let putStart = ~~(Math.random() * this.pixels);
+            let captureStart  = ~~(Math.random() * this.len / 4) * 4;
+            let captureLength = ~~(Math.random() * this.len / 4) * 4;
+            let putStart      = ~~(Math.random() * this.len / 4) * 4;
             let slice = newData.slice(captureStart, captureLength);
 
-            console.log(captureStart, captureLength, putStart, slice);
+            let overflow = (putStart + captureLength) - this.len;
+            if (overflow > 0) {
+                let sub = slice.slice(-overflow, captureLength);
+                newData.set(sub, 0);
+                slice = slice.slice(0, captureLength - overflow);
+            }
 
             newData.set(slice, putStart);
 
