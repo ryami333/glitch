@@ -42,8 +42,9 @@ class App extends Component {
             this.ctx.drawImage(this.img, offsetWidth, offsetHeight, drawWidth, drawHeight);
 
             this.imageData = this.ctx.getImageData(0,0,window.innerWidth, window.innerHeight);
+            this.sourceData = Uint32Array.from(this.imageData.data);
 
-            this.len = this.len = this.imageData.data.length;
+            this.len = this.len = this.sourceData.length;
 
             this._loop();
         });
@@ -51,7 +52,7 @@ class App extends Component {
 
     _loop() {
         window.requestAnimationFrame(function() {
-            let newData = this.imageData.data;
+            let newData = this.sourceData.slice(0, this.sourceData.length);
             let captureStart  = ~~(Math.random() * this.len / 4) * 4;
             let captureLength = ~~(Math.random() * this.len / 4) * 4;
             let putStart      = ~~(Math.random() * this.len / 4) * 4;
