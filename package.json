@@ -37,6 +37,7 @@
     "redux": "^3.6.0"
   },
   "scripts": {
-    "dev": "DEV=true HOT=true bin/browser-sync"
+    "dev": "DEV=true HOT=true bin/browser-sync",
+    "build": "rm -rf public/* && UGLIFY=true bin/webpack"
   }
 }
