@@ -12,7 +12,7 @@ const config = {
 
     output: { 
         path: path.resolve(process.cwd(), 'docs'),
-        publicPath: process.env.DEV ? 'http://localhost:3000' : '/',
+        publicPath: process.env.DEV ? 'http://localhost:3000' : '',
         filename: '[name][chunkhash].js',
     },
 
