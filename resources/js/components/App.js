@@ -57,12 +57,22 @@ class App extends Component {
             let putStart      = ~~(Math.random() * this.len / 4) * 4;
             let slice = newData.slice(captureStart, captureLength);
 
+            //
+            let channel = ~~(Math.random() * 3);
+            let f = ~~(Math.random() * 255);
+            for (let i = 0; i < slice.length; i += 4) {
+                slice[channel + i] = f;
+            }
+
+            //
             let overflow = (putStart + captureLength) - this.len;
             if (overflow > 0) {
                 let sub = slice.slice(-overflow, captureLength);
                 newData.set(sub, 0);
                 slice = slice.slice(0, captureLength - overflow);
             }
+
+
 
             newData.set(slice, putStart);
 
