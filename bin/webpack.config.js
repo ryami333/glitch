@@ -96,17 +96,6 @@ if (process.env.HOT) {
     config.output.path = '/';
 
     config.output.filename = '[name]';
-} else {
-    config.plugins = (config.plugins || []).concat([
-        function() {
-            this.plugin("done", function(stats) {
-                require("fs").writeFileSync(
-                    path.join(process.cwd(), "stats.json"),
-                    JSON.stringify(stats.toJson().assetsByChunkName)
-                );
-            });
-        },
-    ]);
 }
 
 if (process.env.DEV) {
