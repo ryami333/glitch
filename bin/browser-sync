@@ -17,8 +17,6 @@ bs.init({
             log: console.log
         }),
     ],
-
-    server: 'public',
     open: false,
     port: 3000,
     ghostMode: false,

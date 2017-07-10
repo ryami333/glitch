@@ -38,6 +38,6 @@
   },
   "scripts": {
     "dev": "DEV=true HOT=true bin/browser-sync",
-    "build": "rm -rf docs/* && UGLIFY=true bin/webpack"
+    "build": "rm -rf docs/* && UGLIFY=true node_modules/.bin/webpack --config bin/webpack.config.js"
   }
 }
